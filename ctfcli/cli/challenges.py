@@ -3,6 +3,7 @@ import shutil
 import subprocess
 from cookiecutter.main import cookiecutter
 from pathlib import Path
+import sys
 
 import click
 import yaml
@@ -101,7 +102,7 @@ class Challenge(object):
                         "Ignoring existing challenge because of --force", fg="yellow"
                     )
                 else:
-                    return
+                    sys.exit(1)
 
         click.secho(f'Installing {challenge["name"]}', fg="yellow")
         create_challenge(challenge=challenge)
