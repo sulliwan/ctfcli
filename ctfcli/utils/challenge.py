@@ -190,8 +190,10 @@ def create_challenge(challenge):
         for flag in challenge["flags"]:
             if type(flag) == str:
                 data = {"content": flag, "type": "static", "challenge": challenge_id}
-                r = s.post(f"/api/v1/flags", json=data)
-                r.raise_for_status()
+            else:
+                data = {"content": flag["content"], "type": flag["type"], "challenge": challenge_id, "data": flag["data"]}
+            r = s.post(f"/api/v1/flags", json=data)
+            r.raise_for_status()
 
     # Create tags
     if challenge.get("tags"):
